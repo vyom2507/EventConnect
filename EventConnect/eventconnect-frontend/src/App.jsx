@@ -10,6 +10,8 @@ import Events from "./pages/Events";
 import CreateEvent from "./pages/CreateEvent";
 import Profile from "./pages/Profile";
 import EventDetails from "./pages/EventDetails";
+import Contact from "./pages/Contact";
+import Settings from "./pages/Settings";
 import EditEvent from "./pages/EditEvent";
 import { AuthProvider } from "./context/AuthContext";
 import About from "./pages/About";
@@ -33,6 +35,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/events/:id" element={<EventDetails />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/edit-event/:id" element={<EditEvent />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
