@@ -80,9 +80,5 @@ Due to the project scope, a Manual User Acceptance Testing (UAT) strategy was ad
 Future Scope
 
 Backend Migration: Replace the db.js LocalStorage implementation with a Node.js/MongoDB API.
-
 Image Hosting: Integrate Cloudinary for custom event banner uploads.
-
 Social Features: Implement comment sections and attendee lists.
-
-Developed by Vyom2507 | Final Year Capstone Project
