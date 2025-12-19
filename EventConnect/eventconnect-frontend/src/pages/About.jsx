@@ -58,7 +58,7 @@ export default function About() {
             <div className="dev-avatar">V</div>
             <div>
               <h3>Vyom Limbachiya</h3>
-              <p>Developer & Designer</p>
+              
             </div>
           </div>
 
