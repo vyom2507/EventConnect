@@ -1,37 +1,38 @@
 /* ============================================================
-   0. PREMIUM DESIGN SYSTEM
-   Theme: "Electric Midnight"
+   0. PREMIUM DESIGN SYSTEM 
+   Theme: "Electric Midnight" (Violet/Pink/Dark Navy)
 ============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* Brand Colors - High Contrast & Vibrant */
-  --primary: #7c3aed; /* Electric Violet */
-  --primary-hover: #6d28d9;
-  --accent: #f472b6; /* Soft Pink for gradients */
+  /* --- Brand Colors --- */
+  --primary: #7c3aed;       /* Electric Violet */
+  --primary-hover: #6d28d9; /* Deep Violet */
+  --accent: #f472b6;        /* Soft Pink */
   --accent-glow: rgba(124, 58, 237, 0.5);
   
-  /* Backgrounds */
-  --bg-deep: #020617; /* Almost Black */
-  --bg-surface: #0f172a; /* Dark Navy */
+  /* --- Backgrounds --- */
+  --bg-deep: #020617;       /* Almost Black (Main BG) */
+  --bg-surface: #0f172a;    /* Dark Navy (Secondary) */
+  --glass-panel: rgba(15, 23, 42, 0.75); /* Readable glass */
   
-  /* Text */
-  --text-main: #ffffff;
-  --text-secondary: #94a3b8; /* Cool Grey */
-  
-  /* Glassmorphism System */
-  --glass-panel: rgba(15, 23, 42, 0.75); /* Darker for readability */
+  /* --- Borders & Effects --- */
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-shine: rgba(255, 255, 255, 0.05);
   --glass-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.8);
   
-  /* Animation Physics */
+  /* --- Typography --- */
+  --text-main: #ffffff;
+  --text-secondary: #94a3b8; /* Cool Grey */
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  
+  /* --- Animations --- */
   --spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ============================================================
-   1. GLOBAL RESET
+   1. GLOBAL RESET & SCROLLBAR
 ============================================================ */
 * {
   margin: 0;
@@ -39,21 +40,24 @@
   box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif; /* More modern than Inter */
+  font-family: var(--font-main);
   color: var(--text-main);
   background-color: var(--bg-deep);
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 a { text-decoration: none !important; color: inherit; transition: 0.2s; }
 ul { list-style: none; }
 
-/* Premium Scrollbar */
+/* Custom Pro Scrollbar */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg-deep); }
 ::-webkit-scrollbar-thumb { 
@@ -64,7 +68,7 @@ ul { list-style: none; }
 ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
 /* ============================================================
-   2. NAVBAR (Distinct & Professional)
+   2. NAVBAR (Fixed, Distinct & Semi-Transparent)
 ============================================================ */
 header {
   width: 100%;
@@ -73,7 +77,7 @@ header {
   top: 0;
   left: 0;
   z-index: 1000;
-  /* Distinct background so it doesn't blend poorly with hero */
+  /* Dark semi-transparent bg to ensure visibility over any image */
   background: rgba(2, 6, 23, 0.85); 
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--glass-border);
@@ -95,7 +99,7 @@ header {
   font-size: 1.75rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  /* Gradient Text */
+  /* Gradient Text Logo */
   background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -115,7 +119,7 @@ header {
 
 .menu a:hover { color: white; }
 
-/* Menu Dot Indicator */
+/* Menu Dot Indicator Animation */
 .menu a::after {
   content: '';
   position: absolute;
@@ -131,46 +135,43 @@ header {
 .menu a:hover::after { transform: translateX(-50%) scale(1); }
 
 /* ============================================================
-   3. HOME PAGE (HERO WITH YOUR IMAGE)
+   3. HOME PAGE (Hero with Background Image)
 ============================================================ */
-/* IMPORTANT: This container holds the background image.
-   It creates a "window" into the party scene.
-*/
+/* This container holds your specific image */
 .hero-container {
   position: relative;
   width: 100%;
-  min-height: 100vh; /* Full screen height */
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 80px; /* Offset for fixed header */
+  padding-top: 80px; /* Offset for header */
   overflow: hidden;
   
-  /* THE IMAGE SETUP */
+  /* USER IMAGE PATH */
   background-image: url('/images/event-bg.jpg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* Parallax effect */
+  background-attachment: fixed; /* Parallax feel */
 }
 
-/* The Cinematic Overlay - Darkens image so text is readable */
+/* Cinematic Dark Overlay */
 .hero-container::before {
   content: '';
   position: absolute;
   inset: 0;
-  /* Gradient from dark at bottom/top to slightly transparent in middle */
   background: linear-gradient(to bottom, 
-    rgba(2, 6, 23, 0.9) 0%, 
-    rgba(2, 6, 23, 0.6) 50%, 
-    rgba(2, 6, 23, 0.95) 100%
+    rgba(2, 6, 23, 0.8) 0%, 
+    rgba(2, 6, 23, 0.5) 50%, 
+    rgba(2, 6, 23, 0.95) 100% /* Fade to black at bottom */
   );
   z-index: 1;
 }
 
 .hero-glass {
   position: relative;
-  z-index: 2; /* Sits on top of overlay */
+  z-index: 2;
   width: 90%;
   max-width: 900px;
   text-align: center;
@@ -200,6 +201,7 @@ header {
   margin-bottom: 24px;
   letter-spacing: -2px;
   text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  color: white;
 }
 
 .text-gradient {
@@ -210,11 +212,11 @@ header {
 
 .hero-glass p {
   font-size: 1.25rem;
-  color: #cbd5e1; /* Very light grey */
+  color: #cbd5e1;
   max-width: 650px;
   margin: 0 auto 50px;
   font-weight: 400;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Ensures readable on image */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 .hero-actions {
@@ -223,7 +225,7 @@ header {
   justify-content: center;
 }
 
-/* Modern Buttons */
+/* Hero Buttons */
 .hero-btn {
   padding: 18px 40px;
   border-radius: 16px;
@@ -237,7 +239,6 @@ header {
   background: var(--primary);
   color: white;
   border: none;
-  box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7);
 }
 
 .hero-btn.primary:hover {
@@ -259,19 +260,21 @@ header {
 }
 
 /* ============================================================
-   4. DASHBOARD & GENERAL LAYOUT
-   (Used for Dashboard, Events, Profile, etc.)
+   4. LAYOUT WRAPPERS (Dashboard, Events, etc.)
+   NOTE: No image bg here, just clean tech grid
 ============================================================ */
 .dashboard-wrapper, 
 .events-wrapper, 
 .profile-wrapper,
-.settings-wrapper {
+.settings-wrapper,
+.about-wrapper,
+.contact-wrapper {
   position: relative;
   z-index: 2;
-  padding: 120px 20px 60px; /* Top padding clears navbar */
+  padding: 120px 20px 60px; /* Clears navbar */
   max-width: 1280px;
   margin: auto;
-  /* Subtle Background Grid for Tech feel */
+  /* Subtle Tech Grid Pattern */
   background-image: 
     linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
@@ -279,7 +282,9 @@ header {
   background-position: center top;
 }
 
-/* Dashboard Header */
+/* ============================================================
+   5. DASHBOARD COMPONENTS
+============================================================ */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -318,7 +323,6 @@ header {
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-/* Stats Cards */
 .dashboard-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -345,17 +349,6 @@ header {
   box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
 }
 
-/* Glow effect on hover */
-.stat-card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.1), transparent 60%);
-  opacity: 0;
-  transition: 0.4s;
-}
-.stat-card:hover::after { opacity: 1; }
-
 .icon-box {
   width: 60px;
   height: 60px;
@@ -371,9 +364,59 @@ header {
 .stat-card h3 { font-size: 2.2rem; font-weight: 800; line-height: 1; margin-bottom: 5px; }
 .stat-card p { color: var(--text-secondary); font-size: 0.95rem; font-weight: 500; }
 
+/* Widgets */
+.widgets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+.event-widget {
+  background: var(--glass-panel);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex; flex-direction: column;
+  transition: 0.3s;
+}
+.event-widget:hover { border-color: var(--primary); transform: translateY(-3px); }
+.widget-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+.widget-category { background: rgba(124,58,237,0.2); color: #c4b5fd; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+.widget-footer { margin-top: auto; padding-top: 15px; border-top: 1px solid var(--glass-border); display: flex; gap: 15px; font-size: 0.85rem; color: #94a3b8; }
+
 /* ============================================================
-   5. EVENTS & SEARCH
+   6. EVENTS PAGE
 ============================================================ */
+.events-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.events-page-title {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(to right, #fff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.create-event-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+  transition: 0.2s var(--spring);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+.create-event-btn:hover { transform: translateY(-3px) scale(1.02); background: var(--primary-hover); }
+
 .search-container {
   position: relative;
   max-width: 600px;
@@ -406,7 +449,6 @@ header {
   background: rgba(15, 23, 42, 0.9);
 }
 
-/* Event Cards */
 .events-grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -443,51 +485,31 @@ header {
   border: 1px solid var(--glass-border);
 }
 
-.db-month { 
-  font-size: 0.8rem; 
-  font-weight: 800; 
-  color: #f472b6; 
-  text-transform: uppercase; 
-  letter-spacing: 1px;
-}
+.db-month { font-size: 0.8rem; font-weight: 800; color: #f472b6; text-transform: uppercase; letter-spacing: 1px; }
 .db-day { font-size: 2rem; font-weight: 800; color: white; line-height: 1; }
 
 .event-content { flex: 1; display: flex; flex-direction: column; }
 
 .event-tag { 
   align-self: flex-start;
-  font-size: 0.7rem; 
-  font-weight: 700;
-  text-transform: uppercase; 
-  background: rgba(124, 58, 237, 0.2); 
-  color: #c4b5fd; 
-  padding: 5px 10px; 
-  border-radius: 6px; 
-  margin-bottom: 12px;
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase; 
+  background: rgba(124, 58, 237, 0.2); color: #c4b5fd; 
+  padding: 5px 10px; border-radius: 6px; margin-bottom: 12px;
 }
 
 .event-heading { font-size: 1.4rem; font-weight: 700; margin-bottom: 5px; line-height: 1.3; }
 
 .add-cal-btn {
-  margin-top: auto;
-  padding: 12px;
-  background: transparent;
-  border: 1px solid var(--glass-border);
-  color: var(--text-secondary);
-  border-radius: 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: 0.2s;
-  font-weight: 600;
+  margin-top: auto; padding: 12px;
+  background: transparent; border: 1px solid var(--glass-border);
+  color: var(--text-secondary); border-radius: 12px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: 0.2s; font-weight: 600;
 }
-
 .add-cal-btn:hover { background: white; color: var(--bg-deep); border-color: white; }
 
 /* ============================================================
-   6. FORMS (Create Event, Login)
+   7. FORMS (Login, Register, Create Event)
 ============================================================ */
 .create-wrapper, .auth-wrapper {
   display: flex;
@@ -502,7 +524,7 @@ header {
 .create-glass-panel, .auth-glass-card {
   width: 100%;
   max-width: 700px;
-  background: rgba(15, 23, 42, 0.85); /* Darker opacity for forms */
+  background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(40px);
   border: 1px solid var(--glass-border);
   border-radius: 32px;
@@ -512,9 +534,14 @@ header {
 }
 
 .auth-glass-card { max-width: 480px; }
+.auth-header { text-align: center; margin-bottom: 40px; }
+.auth-header h2 { font-size: 2.2rem; font-weight: 800; color: white; margin-bottom: 10px; }
 
 .form-row { display: flex; gap: 24px; margin-bottom: 24px; }
 .half { flex: 1; }
+.create-form { display: flex; flex-direction: column; gap: 24px; }
+.input-group-auth { display: flex; flex-direction: column; gap: 10px; }
+.input-group-auth label { font-size: 0.85rem; font-weight: 600; color: #c7d2fe; margin-left: 4px; }
 
 .glass-input, .glass-select {
   width: 100%;
@@ -528,12 +555,13 @@ header {
   transition: 0.3s;
 }
 
-.glass-input:focus {
+.glass-input:focus, .glass-select:focus {
   outline: none;
   border-color: var(--primary);
   background: rgba(2, 6, 23, 0.8);
   box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
 }
+.glass-select option { background-color: var(--bg-deep); color: white; }
 
 .submit-btn, .btn-auth {
   width: 100%;
@@ -554,112 +582,124 @@ header {
   box-shadow: 0 20px 40px -10px rgba(124, 58, 237, 0.6);
 }
 
+.back-btn {
+  align-self: center; margin-bottom: 30px; background: transparent; border: 1px solid var(--glass-border);
+  color: var(--text-secondary); padding: 10px 20px; border-radius: 50px; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer; max-width: 700px; width: 100%; transition: 0.2s;
+}
+.back-btn:hover { background: rgba(255,255,255,0.05); color: white; }
+
+.auth-footer { text-align: center; margin-top: 30px; font-size: 0.95rem; color: var(--text-secondary); }
+.auth-footer a { color: #a5b4fc !important; font-weight: 700; margin-left: 5px; }
+
 /* ============================================================
-   7. PROFILE PAGE
+   8. PROFILE PAGE
 ============================================================ */
 .profile-card {
-  width: 100%;
-  max-width: 700px;
-  background: var(--glass-panel);
-  backdrop-filter: blur(30px);
-  border: 1px solid var(--glass-border);
-  border-radius: 32px;
-  padding: 50px;
+  width: 100%; max-width: 700px;
+  background: var(--glass-panel); backdrop-filter: blur(30px);
+  border: 1px solid var(--glass-border); border-radius: 32px; padding: 50px;
   animation: fadeInUp 0.7s ease;
 }
 
 .profile-header {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  padding-bottom: 40px;
-  border-bottom: 1px solid var(--glass-border);
-  margin-bottom: 40px;
+  display: flex; align-items: center; gap: 30px; padding-bottom: 40px;
+  border-bottom: 1px solid var(--glass-border); margin-bottom: 40px;
 }
 
 .profile-avatar {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, #f472b6, #7c3aed);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  font-weight: 800;
-  border: 4px solid rgba(255,255,255,0.1);
+  width: 100px; height: 100px;
+  background: linear-gradient(135deg, #f472b6, #7c3aed); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; font-weight: 800; border: 4px solid rgba(255,255,255,0.1);
   box-shadow: 0 0 30px rgba(124, 58, 237, 0.4);
 }
 
-.profile-stats-row {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 40px;
-  background: rgba(2, 6, 23, 0.4);
-  padding: 30px;
-  border-radius: 20px;
-}
+.profile-info h1 { font-size: 2rem; margin-bottom: 6px; font-weight: 800; color: white; }
+.user-role { color: #c4b5fd; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(124, 58, 237, 0.1); padding: 4px 8px; border-radius: 4px; }
 
+.profile-stats-row {
+  display: flex; justify-content: space-around; margin-bottom: 40px;
+  background: rgba(2, 6, 23, 0.4); padding: 30px; border-radius: 20px;
+}
+.p-stat { text-align: center; }
 .p-stat h3 { font-size: 2rem; font-weight: 800; margin-bottom: 5px; }
+.p-stat span { font-size: 0.85rem; opacity: 0.7; font-weight: 500; }
+
+.logout-btn {
+  width: 100%; padding: 16px; background: rgba(239, 68, 68, 0.1); color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; font-weight: 700;
+  cursor: pointer; transition: 0.2s;
+}
+.logout-btn:hover { background: #ef4444; color: white; }
 
 /* ============================================================
-   8. EVENT DETAILS (Sidebar Layout)
+   9. EVENT DETAILS (Sidebar Layout)
 ============================================================ */
-.details-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 50px;
-}
+.details-wrapper { padding: 120px 20px; max-width: 1200px; margin: auto; }
+
+.details-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 50px; }
 
 .details-card {
-  background: var(--glass-panel);
-  padding: 50px;
-  border-radius: 32px;
-  border: 1px solid var(--glass-border);
+  background: var(--glass-panel); padding: 50px; border-radius: 32px;
+  border: 1px solid var(--glass-border); animation: fadeInUp 0.6s ease;
 }
 
 .details-header h1 {
-  font-size: 3rem;
-  font-weight: 800;
-  margin: 15px 0 25px;
-  line-height: 1.1;
+  font-size: 3rem; font-weight: 800; margin: 15px 0 25px; line-height: 1.1;
   background: linear-gradient(to right, #fff, #c4b5fd);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
+
+.details-meta-row { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
+.meta-pill {
+  display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05);
+  padding: 10px 20px; border-radius: 99px; font-size: 0.95rem; color: #e0e7ff;
+  border: 1px solid var(--glass-border);
+}
+
+.details-desc { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 30px; }
+.agenda-list li { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; display: flex; align-items: baseline; }
+.agenda-list li span { font-weight: 700; color: #a78bfa; margin-right: 20px; min-width: 100px; }
 
 /* Right Sidebar for Details */
 .organizer-box {
-  background: var(--glass-panel);
-  padding: 30px;
-  border-radius: 24px;
-  border: 1px solid var(--glass-border);
-  position: sticky;
-  top: 100px;
+  background: var(--glass-panel); padding: 30px; border-radius: 24px;
+  border: 1px solid var(--glass-border); position: sticky; top: 100px; height: fit-content;
 }
+.organizer-box h4 { margin-bottom: 16px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; font-weight: 700; }
+.org-profile { display: flex; align-items: center; gap: 16px; }
+.org-avatar { width: 48px; height: 48px; background: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
 
 .register-main-btn {
-  width: 100%;
-  padding: 18px;
-  background: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 14px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: 0.3s var(--spring);
+  width: 100%; padding: 18px; background: var(--primary); color: white;
+  border: none; border-radius: 14px; font-weight: 700; font-size: 1.1rem;
+  cursor: pointer; margin-top: 20px; transition: 0.3s var(--spring);
 }
-
-.register-main-btn:hover {
-  background: var(--primary-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px -5px rgba(124, 58, 237, 0.4);
-}
+.register-main-btn:hover { background: var(--primary-hover); transform: translateY(-3px); }
 
 /* ============================================================
-   9. UTILITIES & ANIMATIONS
+   10. SETTINGS, CONTACT, ABOUT, 404
+============================================================ */
+.settings-glass-card, .contact-glass-card, .about-glass-card, .glass-error-card {
+  background: var(--glass-panel); backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border); border-radius: 32px; padding: 60px;
+  animation: fadeInUp 0.5s ease; width: 100%;
+}
+
+.contact-glass-card { max-width: 650px; }
+.settings-glass-card { max-width: 850px; }
+.about-glass-card { max-width: 900px; }
+.glass-error-card { max-width: 600px; text-align: center; margin: auto; }
+
+.setting-row { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--glass-border); }
+.setting-info h3 { font-size: 1.2rem; margin-bottom: 5px; }
+.toggle-btn { padding: 8px 16px; border-radius: 99px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: var(--text-secondary); cursor: pointer; transition: 0.3s; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; }
+.toggle-btn.active { background: #10b981; border-color: #10b981; color: white; box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
+
+.error-code { font-size: 8rem; font-weight: 900; background: linear-gradient(to bottom, #fff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: 20px; }
+
+/* ============================================================
+   11. MOBILE RESPONSIVENESS
 ============================================================ */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(40px); }
@@ -671,5 +711,7 @@ header {
   .details-grid { grid-template-columns: 1fr; }
   .header-inner { width: 95%; }
   .profile-header { flex-direction: column; text-align: center; }
+  .profile-stats-row { flex-direction: column; gap: 20px; }
   .form-row { flex-direction: column; gap: 15px; }
+  .dashboard-header { flex-direction: column; align-items: flex-start; gap: 15px; }
 }
