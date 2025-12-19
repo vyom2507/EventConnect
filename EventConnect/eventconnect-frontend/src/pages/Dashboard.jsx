@@ -30,7 +30,7 @@ export default function Dashboard() {
   }, [navigate]);
 
   // Total events is everything in the DB + the 5 defaults
-  const totalEvents = 5 + savedEvents.length; 
+  const totalEvents = 0 + savedEvents.length; 
   
   // Show the most recent 3 events regardless of who created them (Community view)
   const upcoming = savedEvents.slice(0, 3);
