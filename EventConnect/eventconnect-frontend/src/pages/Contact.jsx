@@ -38,12 +38,12 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="contact-form">
               <div className="form-group">
                 <label>Your Name</label>
-                <input type="text" required placeholder="John Doe" className="glass-input" />
+                <input type="text" required placeholder="Your name" className="glass-input" />
               </div>
 
               <div className="form-group">
                 <label>Email Address</label>
-                <input type="email" required placeholder="john@example.com" className="glass-input" />
+                <input type="email" required placeholder="name@example.com" className="glass-input" />
               </div>
 
               <div className="form-group">
