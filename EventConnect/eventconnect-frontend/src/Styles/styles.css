@@ -1467,3 +1467,41 @@ header {
   .profile-header { flex-direction: column; text-align: center; }
   .profile-stats-row { flex-direction: column; gap: 16px; }
 }
+
+.dev-socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 18px 0 30px;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.25s ease;
+}
+
+.social-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.social-icon.insta:hover { color: #e1306c; }
+.social-icon.linked:hover { color: #0a66c2; }
+.social-icon.twit:hover { color: #1d9bf0; }
+.social-icon.fb:hover { color: #1877f2; }
+.social-icon.mail:hover { color: #a5b4fc; }
